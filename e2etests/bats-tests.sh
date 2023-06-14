@@ -900,3 +900,19 @@ get_value_from() {
   print_info "${status}" "${output}" "${cmd}" "${tmp}"
   [ "$status" -eq 0 ]
 }
+
+@test "osdmultiplemonitoringstacks" {
+  tmp="tests/checks/osdmultiplemonitoringstacks.yaml"
+  cmd="${KUBE_LINTER_BIN} lint --include osdmultiplemonitoringstacks --do-not-auto-add-defaults --format json ${tmp}"
+  run ${cmd}
+
+  print_info "${status}" "${output}" "${cmd}" "${tmp}"
+  [ "$status" -eq 1 ]
+  message1=$(get_value_from "${lines[0]}" '.Reports[0].Diagnostic.Message')
+  failing_resource=$(get_value_from "${lines[0]}" '.Reports[0].Object.K8sObject.Name')
+  count=$(get_value_from "${lines[0]}" '.Reports | length')
+
+  [[ "${message1}" == "Deployment: prometheus-operator seems to run a prometheus-operator but is running in namespace 'default'. Multiple prometheus-operators are not supported in OSD." ]]
+  [[ "${failing_resource}" == "prometheus-operator" ]]
+  [[ "${count}" == "1" ]]
+}

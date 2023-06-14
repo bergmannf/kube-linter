@@ -32,6 +32,7 @@ import (
 	_ "golang.stackrox.io/kube-linter/pkg/templates/nodeaffinity"
 	_ "golang.stackrox.io/kube-linter/pkg/templates/nonexistentserviceaccount"
 	_ "golang.stackrox.io/kube-linter/pkg/templates/nonisolatedpod"
+	_ "golang.stackrox.io/kube-linter/pkg/templates/osdmultiplemonitoringstacks"
 	_ "golang.stackrox.io/kube-linter/pkg/templates/pdbmaxunavailable"
 	_ "golang.stackrox.io/kube-linter/pkg/templates/pdbminavailable"
 	_ "golang.stackrox.io/kube-linter/pkg/templates/ports"

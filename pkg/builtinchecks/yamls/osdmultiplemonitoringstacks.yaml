@@ -1,0 +1,7 @@
+name: "osdmultiplemonitoringstacks"
+description: "Flag prometheus operator pods that are not running openshift-monitoring"
+remediation: "Ensure only one prometheus-operator in openshift-monitoring is running."
+scope:
+  objectKinds:
+    - DeploymentLike
+template: "osdmultiplemonitoringstacks"
